@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="./public/assets/icons/favicon-32x32.png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="./public/css/main.css">
+  <title>Product list with cart</title>
+</head>
+<body>
+  <div class="container">
+
+    <!---- item-card-1 ---->
+      <article class="item-card">
+        <div class="product-card-content">
+            <img class="product-image" src="./public/assets/images/image-waffle-mobile.jpg" alt="">
+      <!-- cart-btn -->
+        <div class="cart-btn-content">
+            <button class="cart-btn"><img src="./public/assets/icons/icon-add-to-cart.svg" alt="">Add to Cart</button>
+
+          <!-- quantity-content -->
+            <div class="quantity-content">
+              <div class="quantity-btn">
+                <button class="decrease-btn"><i class="bi bi-dash-circle"></i></button>
+                <span id="quantity-output">0</span>
+                <button class="increase-btn"><i class="bi bi-plus-circle"></i></button>
+                </div>
+            </div>
+          <!-- quantity-content -->
+       </div>
+      <!-- cart-btn -->
+          </div>
+        </article>
+    <!----- item-card-1 ---->
+
+
+  <!---- item-card-2 ---->
+    <!-- cart-btn -->
+      <div class="cart-btn-content">
+          <button class="cart-btn"><img src="./public/assets/icons/icon-add-to-cart.svg" alt="">Add to Cart</button>
+      </div>
+
+
+
+  </div>
+  <script src="./public/js/cart.js"></script>
+</body>
+</html>

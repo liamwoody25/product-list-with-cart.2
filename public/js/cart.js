@@ -2,17 +2,18 @@ const cartSubmit = document.querySelectorAll('.cart-btn');
 const quanbtn = document.querySelectorAll('.quantity-content');
 const insertBtn = document.querySelectorAll('.increase-btn');
 const deleteBtn = document.querySelectorAll('.decrease-btn');
+const cartImageHolder = document.querySelector('.cart-placeholder-content');
 
 
 let cartProducts = [
      {
-       "image": {
+       image: {
             "thumbnail": "./assets/images/image-waffle-thumbnail.jpg",
             "mobile": "./assets/images/image-waffle-mobile.jpg",
             "tablet": "./assets/images/image-waffle-tablet.jpg",
             "desktop": "./assets/images/image-waffle-desktop.jpg"
        },
-       "name": "Waffle with Berries",
+       name: "Waffle with Berries",
        "category": "Waffle",
        "price": 6.50,
        "inCart": 0
@@ -129,6 +130,7 @@ function addItemToCart(cartProduct,[i]) {
   output.innerText = result
 
   quanbtn[i].style.display = 'block'
+  cartImageHolder.style.display = 'none'
 
   if (productItems) {
     localStorage.setItem('addItemToCart', productItems + 1)
@@ -164,7 +166,35 @@ function RemoveItemFromCart(i) {
 
 // this function is for when the cart is being updated
 function updateCart() {
-  let productItems = localStorage.getItem('addItemToCart')
+  let productItems = localStorage.getItem('addItemToCart');
+  let items = localStorage.getItem('cartProductsInCart');
+  let cartContainer = document.querySelector('cart-content');
+  let cartprice = localStorage.getItem('totalPrice')
+
+ items = JSON.parse(items)
+  console.log(items)
+
+  if (items && cartContainer) {
+    cartContainer.innerHTML = ''
+    Object.values(items).map(product => {
+      cartContainer.innerHTML += `
+      <div class="cart-content" style="
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        flex-direction: row-reverse;
+        align-items: baseline;">
+        <button class="remove-btn">
+            <i class="bi bi-x-circle"></i>
+        </button>
+
+        <div class="cart-price">
+          <p>${product.category}</p>
+        </div>
+      </div>
+      `
+    })
+  }
 
   if (productItems) {
     document.getElementById('cart-output').textContent = productItems
@@ -172,6 +202,7 @@ function updateCart() {
 }
 
 updateCart()
+
 
 
 //  this function is for adding multiple products to the cart
@@ -198,6 +229,8 @@ function addProduct(cartProduct) {
 }
 
 
+
+// this function is for when the quantity button is clicked its shows the total prices
 function totalPrice(cartProduct) {
   // console.log('the cartprice is', cartProduct.price )
   
@@ -233,6 +266,7 @@ for (let i = 0; i < insertBtn.length; i++) {
     insertBtn[i].addEventListener('click', function(){
     addItemToCart(cartProducts[i],[i])
     totalPrice(cartProducts[i],[i])
+    updateCart(cartProducts[i],[i])
   })
 }
 

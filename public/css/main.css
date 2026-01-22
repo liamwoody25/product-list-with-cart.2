@@ -1,3 +1,14 @@
+/**** typeography *****/
+
+h4 {
+  font-size: 14px;
+  font-weight: 400;
+  color: #87635A;
+  margin: 0;
+}
+
+
+
 /**** components ****/
 
 .cart-btn {
@@ -56,6 +67,16 @@ span {
   font-weight: 700;
 }
 
+.remove-btn {
+  border: transparent;
+  background: transparent;
+}
+
+.bi-x-circle {
+  color: #87635A;
+  font-size: 16px;
+}
+
 /**** components ****/
 
 
@@ -89,6 +110,12 @@ body {
   display: block;
 }
 
+/**** item-card ****/
+
+
+
+
+/***** cart-section *****/
 
 .cart-section {
   width: 93%;
@@ -104,3 +131,25 @@ body {
   align-items: baseline;
   gap: 16px;
 }
+
+.cart-placeholder-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 16px;
+}
+
+.cart-image {
+  width: 45%;
+  margin-bottom: 16px;
+}
+
+.cart-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  flex-direction: row-reverse;
+  align-items: baseline;
+  
+}
+

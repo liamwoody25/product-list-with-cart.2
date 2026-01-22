@@ -142,6 +142,26 @@ function addItemToCart(cartProduct,[i]) {
 }
 
 
+
+// this function removes an item from the cart
+function RemoveItemFromCart(i) {
+  const output = document.querySelectorAll('#quantity-output')[i];
+  const result = Number(output.innerText) - 1
+
+  if (result < 0) {
+    result = 0
+  }
+
+  output.innerText = result
+
+  if (result === 0) {
+    quanbtn[i].style.display = 'none'
+  }
+}
+
+
+
+
 // this function is for when the cart is being updated
 function updateCart() {
   let productItems = localStorage.getItem('addItemToCart')
@@ -154,7 +174,7 @@ function updateCart() {
 updateCart()
 
 
-
+//  this function is for adding multiple products to the cart
 function addProduct(cartProduct) {
   let items = localStorage.getItem('cartProductsInCart')
   items = JSON.parse(items)
@@ -178,22 +198,25 @@ function addProduct(cartProduct) {
 }
 
 
+function totalPrice(cartProduct) {
+  // console.log('the cartprice is', cartProduct.price )
+  
+  let cartprice = localStorage.getItem('totalPrice')
 
-// this function removes an item from the cart
-function RemoveItemFromCart(i) {
-  const output = document.querySelectorAll('#quantity-output')[i];
-  const result = Number(output.innerText) - 1
+  console.log('my cart price is', cartprice)
 
-  if (result < 0) {
-    result = 0
+  if (cartprice != null ) {
+    cartprice = parseInt(cartprice)
+    localStorage.setItem('totalPrice', cartprice + cartProduct.price)
+  } else {
+     localStorage.setItem('totalPrice', cartProduct.price)
   }
 
-  output.innerText = result
-
-  if (result === 0) {
-    quanbtn[i].style.display = 'none'
-  }
+ 
 }
+
+
+
 
 
 
@@ -209,6 +232,7 @@ for (let i = 0; i < cartSubmit.length; i++) {
 for (let i = 0; i < insertBtn.length; i++) {
     insertBtn[i].addEventListener('click', function(){
     addItemToCart(cartProducts[i],[i])
+    totalPrice(cartProducts[i],[i])
   })
 }
 

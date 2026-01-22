@@ -115,7 +115,7 @@ let cartProducts = [
      }
 ]
 
-
+// this function sends the item to the cart
 function addItemToCart(cartProduct,[i]) {
   const output = document.querySelectorAll('#quantity-output')[i];
   const result = Number(output.innerText) + 1;
@@ -139,8 +139,21 @@ function addItemToCart(cartProduct,[i]) {
   }
 
   addProduct(cartProduct)
-  
 }
+
+
+// this function is for when the cart is being updated
+function updateCart() {
+  let productItems = localStorage.getItem('addItemToCart')
+
+  if (productItems) {
+    document.getElementById('cart-output').textContent = productItems
+  }
+}
+
+updateCart()
+
+
 
 function addProduct(cartProduct) {
   let items = localStorage.getItem('cartProductsInCart')
@@ -166,7 +179,7 @@ function addProduct(cartProduct) {
 
 
 
-
+// this function removes an item from the cart
 function RemoveItemFromCart(i) {
   const output = document.querySelectorAll('#quantity-output')[i];
   const result = Number(output.innerText) - 1

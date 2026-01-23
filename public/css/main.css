@@ -1,10 +1,28 @@
 /**** typeography *****/
 
+* {
+  font-family: 'Red Hat Text';
+}
+
+h2 {
+  font-size: 24px;
+  color: #C73B0F;
+  font-weight: 700;
+  padding-bottom: 24px;
+  margin: 0;
+}
+
 h4 {
   font-size: 14px;
   font-weight: 400;
   color: #87635A;
   margin: 0;
+}
+
+p {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 4px 0px;
 }
 
 
@@ -96,7 +114,20 @@ body {
 /***** body *****/
 
 
-/**** item-card ****/
+/**** main-section ****/
+
+.product-cards-and-cart {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/**** product-section ****/
+
+.product-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
 
 .item-card {
   width: 100%;
@@ -144,12 +175,41 @@ body {
   margin-bottom: 16px;
 }
 
-.cart-content {
+.product-item{
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   flex-direction: row-reverse;
-  align-items: baseline;
-  
+  margin-bottom: 16px;
+  gap: 16px;
 }
+
+.cart-price p{
+  font-weight: 600
+}
+
+.cart-quantity {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: baseline;
+}
+
+.cart-quantity h4 {
+  display: flex;
+  justify-content: center;
+}
+
+.cart-quantity span {
+  color: #C73B0F;
+  margin-right: 8px;
+}
+
+.cart-total-content {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+
 

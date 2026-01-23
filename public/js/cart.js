@@ -168,7 +168,7 @@ function RemoveItemFromCart(i) {
 function updateCart() {
   let productItems = localStorage.getItem('addItemToCart');
   let items = localStorage.getItem('cartProductsInCart');
-  let cartContainer = document.querySelector('cart-content');
+  let cartContainer = document.querySelector('.cart-content');
   let cartprice = localStorage.getItem('totalPrice')
 
  items = JSON.parse(items)
@@ -178,27 +178,33 @@ function updateCart() {
     cartContainer.innerHTML = ''
     Object.values(items).map(product => {
       cartContainer.innerHTML += `
-      <div class="cart-content" style="
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        flex-direction: row-reverse;
-        align-items: baseline;">
-        <button class="remove-btn">
-            <i class="bi bi-x-circle"></i>
-        </button>
-
+      <div class="product-item">
+          <button class="remove-btn"><i class="bi bi-x-circle"></i></button>
         <div class="cart-price">
-          <p>${product.category}</p>
-        </div>
+            <p>${product.name}</p>
+          <div class="cart-quantity">
+            <span>${product.inCart}x</span>
+            <h4> @$${product.inCart * product.price}</H4>
+            <h4> $${product.price}</h4>
+          </div>
+        <div>
       </div>
-      `
+      `;
     })
+
+     cartContainer.innerHTML += `
+        <div class="cart-total-content">
+          <h4 class="cart-total-title">Order Total</h4>
+          <h2>${cartprice}</h2>
+        </div>
+      `
   }
 
   if (productItems) {
     document.getElementById('cart-output').textContent = productItems
   }
+
+  cartImageHolder.style.display = 'none'
 }
 
 updateCart()

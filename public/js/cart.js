@@ -2,7 +2,9 @@ const cartSubmit = document.querySelectorAll('.cart-btn');
 const quanbtn = document.querySelectorAll('.quantity-content');
 const insertBtn = document.querySelectorAll('.increase-btn');
 const deleteBtn = document.querySelectorAll('.decrease-btn');
+const imageCard = document.querySelectorAll('.product-image');
 const cartImageHolder = document.querySelector('.cart-placeholder-content');
+const carbonImage = document.querySelector('.cart-cta');
 
 
 let cartProducts = [
@@ -131,6 +133,7 @@ function addItemToCart(cartProduct,[i]) {
 
   quanbtn[i].style.display = 'block'
   cartImageHolder.style.display = 'none'
+  imageCard[i].style.border = '3px solid #C73B0F'
 
   if (productItems) {
     localStorage.setItem('addItemToCart', productItems + 1)
@@ -158,6 +161,7 @@ function RemoveItemFromCart(i) {
 
   if (result === 0) {
     quanbtn[i].style.display = 'none'
+    imageCard[i].style.border = 'none'
   }
 }
 
@@ -176,28 +180,58 @@ function updateCart() {
 
   if (items && cartContainer) {
     cartContainer.innerHTML = ''
-    Object.values(items).map(product => {
-      cartContainer.innerHTML += `
-      <div class="product-item">
-          <button class="remove-btn"><i class="bi bi-x-circle"></i></button>
-        <div class="cart-price">
-            <p>${product.name}</p>
-          <div class="cart-quantity">
-            <span>${product.inCart}x</span>
-            <h4> @$${product.inCart * product.price}</H4>
-            <h4> $${product.price}</h4>
-          </div>
-        <div>
-      </div>
-      `;
+    Object.values(items).forEach(function(product){
+
+      const productTtem = document.createElement('div');
+      productTtem.classList.add('product-item');
+
+      const removeBtn = document.createElement('button');
+      removeBtn.classList.add('remove-btn');
+      removeBtn.innerHTML = '<i class="bi bi-x-circle"></i>'
+
+      const PriceContainer = document.createElement('div');
+      PriceContainer.classList.add('product-price-container');
+
+      const productName = document.createElement('p');
+      productName.textContent = product.name;
+
+      const productQuan = document.createElement('div');
+      productQuan.classList.add('product-quantity');
+
+      const cartQuan = document.createElement('span')
+      cartQuan.textContent = `x${product.inCart}`
+
+      const priceContent = document.createElement('h4');
+      priceContent.textContent = `@ $${product.inCart * product.price}`;
+
+      const productPrice = document.createElement('h4');
+      productPrice.textContent = `$${product.price}`
+
+      productQuan.append(cartQuan,priceContent, productPrice );
+      PriceContainer.append(productName, productQuan);
+
+      productTtem.append(removeBtn, PriceContainer)
+      cartContainer.append(productTtem)
+
+
     })
 
-     cartContainer.innerHTML += `
-        <div class="cart-total-content">
-          <h4 class="cart-total-title">Order Total</h4>
-          <h2>${cartprice}</h2>
-        </div>
-      `
+    const cartTotal = document.createElement('div')
+    cartTotal.classList.add('cart-total-content')
+
+    const cartTitle = document.createElement('h4')
+    cartTitle.innerHTML = 'orderTotal'
+
+    const 
+
+
+
+    //  cartContainer.innerHTML += `
+    //     <div class="cart-total-content">
+    //       <h4 class="cart-total-title">Order Total</h4>
+    //       <h2>$${cartprice}</h2>
+    //     </div>
+    //   `
   }
 
   if (productItems) {
@@ -205,6 +239,14 @@ function updateCart() {
   }
 
   cartImageHolder.style.display = 'none'
+
+  if (items === 0) {
+    carbonImage.style.display = 'block'
+  } else {
+    carbonImage.style.display ='flex'
+  }
+  
+
 }
 
 updateCart()

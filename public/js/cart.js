@@ -212,26 +212,23 @@ function updateCart() {
 
       productTtem.append(removeBtn, PriceContainer)
       cartContainer.append(productTtem)
-
-
     })
 
-    const cartTotal = document.createElement('div')
-    cartTotal.classList.add('cart-total-content')
+ 
 
-    const cartTitle = document.createElement('h4')
-    cartTitle.innerHTML = 'orderTotal'
+      const cartTotal = document.createElement('div')
+      cartTotal.classList.add('cart-total-content')
 
-    const 
+      const cartHd = document.createElement('h4')
+      cartHd.classList.add('Order-total-text')
+      cartHd.textContent = 'orderTotal'
 
+      const cartTitle = document.createElement('h2');
+      cartTitle.textContent = `$${cartprice}`
 
+      cartTotal.append(cartHd,cartTitle)
+      cartContainer.append(cartTotal)
 
-    //  cartContainer.innerHTML += `
-    //     <div class="cart-total-content">
-    //       <h4 class="cart-total-title">Order Total</h4>
-    //       <h2>$${cartprice}</h2>
-    //     </div>
-    //   `
   }
 
   if (productItems) {

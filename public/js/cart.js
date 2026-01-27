@@ -3,6 +3,8 @@ const quanbtn = document.querySelectorAll('.quantity-content');
 const insertBtn = document.querySelectorAll('.increase-btn');
 const deleteBtn = document.querySelectorAll('.decrease-btn');
 const imageCard = document.querySelectorAll('.product-image');
+const imgCard = document.querySelectorAll('.product-image-tablet');
+const cardImage = document.querySelectorAll('.product-image-desktop');
 const cartImageHolder = document.querySelector('.cart-placeholder-content');
 const carbonImage = document.querySelector('.cart-cta');
 
@@ -134,6 +136,8 @@ function addItemToCart(cartProduct,[i]) {
   quanbtn[i].style.display = 'block'
   cartImageHolder.style.display = 'none'
   imageCard[i].style.border = '3px solid #C73B0F'
+  imgCard[i].style.border = '3px solid #C73B0F'
+  cardImage[i].style.border = '3px solid #C73B0F'
 
   if (productItems) {
     localStorage.setItem('addItemToCart', productItems + 1)
@@ -163,13 +167,17 @@ function RemoveItemFromCart(i) {
     quanbtn[i].style.display = 'none'
     imageCard[i].style.border = 'none'
   }
+
+  const cartTitle = document.createElement('h2');
+  cartTitle.textContent = `$${cartprice}`
+
 }
 
 
 
 
 // this function is for when the cart is being updated
-function updateCart() {
+function updateCart(cartProduct) {
   let productItems = localStorage.getItem('addItemToCart');
   let items = localStorage.getItem('cartProductsInCart');
   let cartContainer = document.querySelector('.cart-content');
@@ -187,6 +195,7 @@ function updateCart() {
 
       const removeBtn = document.createElement('button');
       removeBtn.classList.add('remove-btn');
+      
       removeBtn.innerHTML = '<i class="bi bi-x-circle"></i>'
 
       const PriceContainer = document.createElement('div');
@@ -210,26 +219,29 @@ function updateCart() {
       productQuan.append(cartQuan,priceContent, productPrice );
       PriceContainer.append(productName, productQuan);
 
+      removeBtn.addEventListener('click', function(){
+        productTtem.remove(removeBtn,PriceContainer)
+      })
       productTtem.append(removeBtn, PriceContainer)
       cartContainer.append(productTtem)
     })
 
+       const cartTotal = document.createElement('div')
+    cartTotal.classList.add('cart-total-content')
+
+    const cartHd = document.createElement('h4')
+    cartHd.classList.add('Order-total-text')
+    cartHd.textContent = 'orderTotal'
+
+    const cartTitle = document.createElement('h2');
+    cartTitle.textContent = `$${cartprice}`
+
+    cartTotal.append(cartHd,cartTitle)
+    cartContainer.append(cartTotal)
+  }
+
  
 
-      const cartTotal = document.createElement('div')
-      cartTotal.classList.add('cart-total-content')
-
-      const cartHd = document.createElement('h4')
-      cartHd.classList.add('Order-total-text')
-      cartHd.textContent = 'orderTotal'
-
-      const cartTitle = document.createElement('h2');
-      cartTitle.textContent = `$${cartprice}`
-
-      cartTotal.append(cartHd,cartTitle)
-      cartContainer.append(cartTotal)
-
-  }
 
   if (productItems) {
     document.getElementById('cart-output').textContent = productItems
@@ -318,6 +330,6 @@ for (let i = 0; i < insertBtn.length; i++) {
 for (let i = 0; i < deleteBtn.length; i++) {
     deleteBtn[i].addEventListener('click', function(){
     RemoveItemFromCart(i)
+    updateCart(cartProducts[i],[i])
   })  
 }
-

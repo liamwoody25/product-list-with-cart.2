@@ -149,7 +149,8 @@ body {
   border-radius: 8px;
 }
 
-
+.item-card .product-image-desktop{display: none;}
+.item-card .product-image-tablet{display: none;}
 .item-card .product-image {
   width: 100%;
   border-radius: 8px;
@@ -270,5 +271,164 @@ body {
   font-weight: 600;
   font-size: 14px;
 }
+
+/***** cart-section *****/
+
+
+
+/***** media queries tableyt *****/
+
+@media screen and (min-width: 768px) {
+
+  /**** components ****/
+
+  .cart-btn-content {
+    position: relative;
+    left: -54px;
+  }
+
+  /**** components ****/
+
+
+
+  
+  /**** body ****/
+
+  .container {
+    max-width: 1440px;
+    width: 90%;
+    margin: 40px;
+  }
+
+  /**** body ****/
+
+
+
+  /**** main-section ****/
+
+  .product-cards-and-cart {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+
+  /*** product-section ***/
+  
+  .item-card {
+    width: 31%;
+    border-radius: 8px;
+  }
+
+  .item-card .product-image{display: none;}
+  .item-card .product-image-desktop{display: none;}
+  .item-card .product-image-tablet {
+    display: block;
+    border-radius: 8px;
+    width: 100%;
+    box-shadow: 3px 5px 9px -6px black;
+  }
+
+  /*** product-section ***/
+
+
+  /*** cart-section ***/
+
+  .cart-section {
+    width: 90%;
+    margin-top: 24px;
+  }
+
+  .cart-placeholder-content {
+    padding: 24px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cart-image {
+    width: 20%;
+  }
+
+  /*** cart-section ***/
+
+  
+  /**** main-section ****/
+}
+
+
+
+
+/*** media queries desktop ***/
+
+@media screen and (min-width:1440px) {
+
+  /**** componenets ****/
+
+  .cart-btn-content {
+    position: relative;
+    left: -26px;
+  }
+
+
+  /**** body ****/
+
+  .container {
+    max-width: 1440px;
+    width: 94%;
+    margin: 88px 50px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  /**** body ****/
+
+
+
+  /**** main-section ****/
+
+  .product-cards-and-cart {
+    display: flex;
+     justify-content: center;
+  }
+
+
+  /**** product-section ****/
+
+  .products {
+    width: 65%;
+  }
+
+  .item-card {
+    width: 31%;
+  }
+
+  .item-card .product-image{display: none;}
+  .item-card .product-image-tablet{display: none;}
+  .item-card .product-image-desktop {
+    display: block;
+    width: 100%;
+    border-radius: 8px;
+  }
+
+  /**** product-section ****/
+
+
+  /**** cart-section ****/
+
+  .cart-section {
+    padding: 24px;
+    width: 22%;
+    height: 230px;
+    height: 50%;
+  }
+
+  .cart-image {
+    width: 30%;
+  }
+
+  
+}
+
 
 

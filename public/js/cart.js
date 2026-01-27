@@ -177,7 +177,7 @@ function RemoveItemFromCart(i) {
 
 
 // this function is for when the cart is being updated
-function updateCart(cartProduct) {
+function updateCart() {
   let productItems = localStorage.getItem('addItemToCart');
   let items = localStorage.getItem('cartProductsInCart');
   let cartContainer = document.querySelector('.cart-content');
@@ -224,24 +224,25 @@ function updateCart(cartProduct) {
       })
       productTtem.append(removeBtn, PriceContainer)
       cartContainer.append(productTtem)
+      
     })
-
-       const cartTotal = document.createElement('div')
-    cartTotal.classList.add('cart-total-content')
-
-    const cartHd = document.createElement('h4')
-    cartHd.classList.add('Order-total-text')
-    cartHd.textContent = 'orderTotal'
-
-    const cartTitle = document.createElement('h2');
-    cartTitle.textContent = `$${cartprice}`
-
-    cartTotal.append(cartHd,cartTitle)
-    cartContainer.append(cartTotal)
-  }
 
  
 
+      const cartTotal = document.createElement('div')
+      cartTotal.classList.add('cart-total-content')
+
+      const cartHd = document.createElement('h4')
+      cartHd.classList.add('Order-total-text')
+      cartHd.textContent = 'orderTotal'
+
+      const cartTitle = document.createElement('h2');
+      cartTitle.textContent = `$${cartprice}`
+
+      cartTotal.append(cartHd,cartTitle)
+      cartContainer.append(cartTotal)
+
+  }
 
   if (productItems) {
     document.getElementById('cart-output').textContent = productItems

@@ -190,59 +190,59 @@ function updateCart() {
     cartContainer.innerHTML = ''
     Object.values(items).forEach(function(product){
 
-      const productTtem = document.createElement('div');
-      productTtem.classList.add('product-item');
+    const productItem = document.createElement('div');
+    productItem.classList.add('product-item')
 
-      const removeBtn = document.createElement('button');
-      removeBtn.classList.add('remove-btn');
-      
-      removeBtn.innerHTML = '<i class="bi bi-x-circle"></i>'
+    const removeBtn = document.createElement('button');
+    removeBtn.classList.add('remove-btn');
+    removeBtn.innerHTML = '<i class="bi bi-x-circle"></i>'
 
-      const PriceContainer = document.createElement('div');
-      PriceContainer.classList.add('product-price-container');
+    const priceContainer = document.createElement('div');
+    priceContainer.classList.add('product-price-container');
 
-      const productName = document.createElement('p');
-      productName.textContent = product.name;
+    const productName = document.createElement('p');
+    productName.textContent = product.name;
 
-      const productQuan = document.createElement('div');
-      productQuan.classList.add('product-quantity');
+    const priceQuan = document.createElement('div');
+    priceQuan.classList.add('product-quantity');
 
-      const cartQuan = document.createElement('span')
-      cartQuan.textContent = `x${product.inCart}`
+    const cartQuan = document.createElement('span');
+    cartQuan.textContent = `x${product.inCart}`;
 
-      const priceContent = document.createElement('h4');
-      priceContent.textContent = `@ $${product.inCart * product.price}`;
+    const priceContent = document.createElement('h4');
+    priceContent.textContent = `$${product.inCart * product.price}`;
 
-      const productPrice = document.createElement('h4');
-      productPrice.textContent = `$${product.price}`
+    const productPrice = document.createElement('h4');
+    productPrice.textContent = `$${product.price}`;
 
-      productQuan.append(cartQuan,priceContent, productPrice );
-      PriceContainer.append(productName, productQuan);
+    priceQuan.append(cartQuan, priceContent, productPrice);
+    priceContainer.append(productName, priceQuan)
 
-      removeBtn.addEventListener('click', function(){
-        productTtem.remove(removeBtn,PriceContainer)
-      })
-      productTtem.append(removeBtn, PriceContainer)
-      cartContainer.append(productTtem)
-      
+    // this eventlistener listens for when the remove button removes product from the cart
+    removeBtn.addEventListener('click', function(){
+      productItem.remove(removeBtn, priceContainer)
     })
-
- 
-
-      const cartTotal = document.createElement('div')
-      cartTotal.classList.add('cart-total-content')
-
-      const cartHd = document.createElement('h4')
-      cartHd.classList.add('Order-total-text')
-      cartHd.textContent = 'orderTotal'
-
-      const cartTitle = document.createElement('h2');
-      cartTitle.textContent = `$${cartprice}`
-
-      cartTotal.append(cartHd,cartTitle)
-      cartContainer.append(cartTotal)
-
+    productItem.append(removeBtn, priceContainer)
+    cartContainer.append(productItem)
+    })
   }
+
+    const cartTotal = document.createElement('div');
+    cartTotal.classList.add('cart-total-content');
+
+    const cartHd = document.createElement('h4');
+    cartHd.classList.add('Order-total-text');
+    cartHd.textContent = 'Order Total'
+    
+    const cartTitle = document.createElement('h2');
+    cartTitle.textContent = `$${cartprice}`
+
+    cartTotal.append(cartHd, cartTitle);
+    cartContainer.append(cartTotal);
+
+    if (productItem) {
+      
+    }
 
   if (productItems) {
     document.getElementById('cart-output').textContent = productItems

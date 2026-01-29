@@ -146,6 +146,7 @@ function addItemToCart(cartProduct,[i]) {
     localStorage.setItem('addItemToCart', 1)
     document.getElementById('cart-output').textContent = 1
   }
+  
 
   addProduct(cartProduct)
 }

@@ -7,6 +7,7 @@ const imgCard = document.querySelectorAll('.product-image-tablet');
 const cardImage = document.querySelectorAll('.product-image-desktop');
 const cartImageHolder = document.querySelector('.cart-placeholder-content');
 const carbonImage = document.querySelector('.cart-cta');
+const confirmBtn = document.querySelector('.confirm-btn');
 
 
 let cartProducts = [
@@ -154,9 +155,9 @@ function addItemToCart(cartProduct,[i]) {
 
 
 // this function removes an item from the cart
-function RemoveItemFromCart(i) {
+function RemoveItemFromCart(cartProduct,i) {
   const output = document.querySelectorAll('#quantity-output')[i];
-  let cartprice = localStorage.getItem('totalPrice');
+  let cartPrice = localStorage.getItem('totalPrice')
   const result = Number(output.innerText) - 1
 
   if (result < 0) {
@@ -168,11 +169,29 @@ function RemoveItemFromCart(i) {
   if (result === 0) {
     quanbtn[i].style.display = 'none'
     imageCard[i].style.border = 'none'
+  } 
+
+  
+  cartPrice - cartProduct.price
+
+  if (cartPrice) {
+
+  }
+  
+  if (updateCart) {
+     localStorage.setItem('totalPrice', cartPrice - 1);
+     document.getElementById('cart-output').textContent = cartProduct.inCart - 1
+  } else {
+    localStorage.setItem('totalPrice', 1)
+    document.getElementById('cart-output').textContent = 1
   }
 
   
+ 
 
-}
+  
+  }
+  
 
 
 
@@ -184,8 +203,8 @@ function updateCart() {
   let cartContainer = document.querySelector('.cart-content');
   let cartprice = localStorage.getItem('totalPrice')
 
- items = JSON.parse(items)
-  console.log(items)
+  items = JSON.parse(items)
+    console.log(items)
 
   if (items && cartContainer) {
     cartContainer.innerHTML = ''
@@ -223,11 +242,13 @@ function updateCart() {
     removeBtn.addEventListener('click', function(){
       productItem.remove(removeBtn, priceContainer)
     })
+
     productItem.append(removeBtn, priceContainer)
     cartContainer.append(productItem)
+
     })
   }
-
+    
     const cartTotal = document.createElement('div');
     cartTotal.classList.add('cart-total-content');
 
@@ -237,22 +258,24 @@ function updateCart() {
     
     const cartTitle = document.createElement('h2');
     cartTitle.textContent = `$${cartprice}`
-
-    cartTotal.append(cartHd, cartTitle);
+    
+    cartTotal.append(cartHd, cartTitle,);
     cartContainer.append(cartTotal);
 
 
-  if (productItems) {
-    document.getElementById('cart-output').textContent = productItems
-  }
+    if (productItems) {
+      document.getElementById('cart-output').textContent = productItems
+    }
 
-  cartImageHolder.style.display = 'none'
+    cartImageHolder.style.display = 'none'
 
   if (items === 0) {
     carbonImage.style.display = 'block'
   } else {
     carbonImage.style.display ='flex'
   }
+
+  confirmBtn.style.display = 'none'
   
 
 }
@@ -290,13 +313,13 @@ function addProduct(cartProduct) {
 function totalPrice(cartProduct) {
   // console.log('the cartprice is', cartProduct.price )
   
-  let cartprice = localStorage.getItem('totalPrice')
+  let cartPrice = localStorage.getItem('totalPrice')
 
-  console.log('my cart price is', cartprice)
+  console.log('my cart price is', cartPrice)
 
-  if (cartprice != null ) {
-    cartprice = parseInt(cartprice)
-    localStorage.setItem('totalPrice', cartprice + cartProduct.price)
+  if (cartPrice != null ) {
+    cartPrice = parseInt(cartPrice)
+    localStorage.setItem('totalPrice', cartPrice + cartProduct.price)
   } else {
      localStorage.setItem('totalPrice', cartProduct.price)
   }
@@ -328,7 +351,11 @@ for (let i = 0; i < insertBtn.length; i++) {
 
 for (let i = 0; i < deleteBtn.length; i++) {
     deleteBtn[i].addEventListener('click', function(){
-    RemoveItemFromCart(i)
+    RemoveItemFromCart(cartProducts[i],[i])
     updateCart(cartProducts[i],[i])
   })  
 }
+
+confirmBtn.addEventListener('click', function() {
+  updateCart()
+})

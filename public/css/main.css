@@ -110,6 +110,18 @@ span {
   color: #C73B0F;
 }
 
+.confirm-btn {
+  margin-top: 24px;
+  width: 100%;
+  background-color:#C73B0F;
+  border-radius: 999px;
+  padding: 16px;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+}
+
 /**** components ****/
 
 

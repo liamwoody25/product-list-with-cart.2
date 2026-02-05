@@ -359,6 +359,11 @@ body {
     width: 20%;
   }
 
+  .cart-cta {
+    width: 95%;
+    display: flex;
+    justify-content: center;
+  }
   /*** cart-section ***/
 
   

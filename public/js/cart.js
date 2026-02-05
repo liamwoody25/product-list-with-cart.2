@@ -157,8 +157,8 @@ function addItemToCart(cartProduct,[i]) {
 // this function removes an item from the cart
 function RemoveItemFromCart(cartProduct,i) {
   const output = document.querySelectorAll('#quantity-output')[i];
-  let cartPrice = localStorage.getItem('totalPrice')
   const result = Number(output.innerText) - 1
+  let cartPrice = Number(localStorage.getItem('totalPrice')) || 0;
 
   if (result < 0) {
     result = 0
@@ -169,27 +169,29 @@ function RemoveItemFromCart(cartProduct,i) {
   if (result === 0) {
     quanbtn[i].style.display = 'none'
     imageCard[i].style.border = 'none'
+    imgCard[i].style.border = 'none'
+    cardImage[i].style.border = 'none'
   } 
 
-  
-  cartPrice - cartProduct.price
+  cartPrice -= cartProduct.price
+
+  if (cartPrice < 0 ) {
+    cartPrice = 0
+  }
+
 
   if (cartPrice) {
-
-  }
-  
-  if (updateCart) {
-     localStorage.setItem('totalPrice', cartPrice - 1);
-     document.getElementById('cart-output').textContent = cartProduct.inCart - 1
+    localStorage.setItem('totalPrice', cartPrice )
+    document.getElementById('cart-output').textContent -= cartPrice;
   } else {
-    localStorage.setItem('totalPrice', 1)
-    document.getElementById('cart-output').textContent = 1
+    localStorage.setItem('totalPrice', cartPrice )
+    document.getElementById('cart-output').textContent = cartPrice
   }
 
-  
+  localStorage.setItem('totalPrice', cartPrice)
  
 
-  
+
   }
   
 
@@ -201,7 +203,7 @@ function updateCart() {
   let productItems = localStorage.getItem('addItemToCart');
   let items = localStorage.getItem('cartProductsInCart');
   let cartContainer = document.querySelector('.cart-content');
-  let cartprice = localStorage.getItem('totalPrice')
+  let cartPrice = Number(localStorage.getItem('totalPrice')) || 0;
 
   items = JSON.parse(items)
     console.log(items)
@@ -241,6 +243,10 @@ function updateCart() {
     // this eventlistener listens for when the remove button removes product from the cart
     removeBtn.addEventListener('click', function(){
       productItem.remove(removeBtn, priceContainer)
+      document.getElementById('cart-output').textContent = cartPrice;
+      
+
+     
     })
 
     productItem.append(removeBtn, priceContainer)
@@ -257,11 +263,24 @@ function updateCart() {
     cartHd.textContent = 'Order Total'
     
     const cartTitle = document.createElement('h2');
-    cartTitle.textContent = `$${cartprice}`
+    cartTitle.textContent = `$${cartPrice}`
     
     cartTotal.append(cartHd, cartTitle,);
     cartContainer.append(cartTotal);
 
+
+    if (cartPrice < 0) {
+      cartPrice = 0;
+      items.style.display = 'none'
+    }
+
+    localStorage.setItem('totalPrice', cartPrice)
+
+   
+     if (items) {
+        cartImageHolder.style.display = 'block'
+        carbonImage.style.display = 'none'
+      }
 
     if (productItems) {
       document.getElementById('cart-output').textContent = productItems
@@ -352,7 +371,7 @@ for (let i = 0; i < insertBtn.length; i++) {
 for (let i = 0; i < deleteBtn.length; i++) {
     deleteBtn[i].addEventListener('click', function(){
     RemoveItemFromCart(cartProducts[i],[i])
-    updateCart(cartProducts[i],[i])
+    updateCart()
   })  
 }
 
